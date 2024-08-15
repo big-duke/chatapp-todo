@@ -1,26 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { AddTodoForm } from './components/add-todo-form/add-todo-form';
+import { TodoList } from './components/todo-list/todo-list';
+import { Container, Stack, Typography } from '@mui/material';
+import { Filter } from './components/filter/filter';
 
-function App() {
+export const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Stack spacing={2} alignItems="center">
+        <Typography variant="h4" align="center" gutterBottom>
+          Todo List
+        </Typography>
+        <AddTodoForm />
+        <Filter />
+        <TodoList />
+      </Stack>
+    </Container>
   );
-}
-
-export default App;
+};
