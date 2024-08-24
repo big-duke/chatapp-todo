@@ -1,18 +1,20 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '..';
+import { todosAdapter } from './todo-slice';
 
-type AppState = Pick<RootState, 'todos'>;
+// Selector to get all todos from the EntityState
+const selectTodos = todosAdapter.getSelectors<RootState>(
+  (state) => state.todos
+).selectAll;
 
-export const getTodos = (state: AppState) => state.todos.todos;
-export const getFilter = (state: AppState) => state.todos.filter;
-export const getFilteredTodos = createSelector(
-  getTodos,
-  getFilter,
-  (todos, filter) => {
-    if (filter === 'all')
-    {
-        return todos
-    }
-    return todos.filter(todo => todo.completed === (filter === 'completed'))
-  }
+// Selector to get the current filter
+export const selectFilter = (state: RootState) => state.todos.filter;
+
+// Selector to get filtered todos based on the current filter
+export const selectFilteredTodos = createSelector(
+  [selectTodos, selectFilter],
+  (todos, filter) =>
+    filter === 'all'
+      ? todos
+      : todos.filter((todo) => todo.completed === (filter === 'completed'))
 );

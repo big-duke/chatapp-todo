@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { getFilteredTodos } from '../../store/todo-data/todo-selectors';
+import { selectFilteredTodos } from '../../store/todo-data/todo-selectors';
 import { TodoItem } from '../todo-item/todo-item';
 import { Container } from '@mui/material';
 import { todoActions } from '../../store/todo-data/todo-slice';
 
 export const TodoList: React.FC = () => {
   const dispatch = useAppDispatch();
-  const todos = useAppSelector(getFilteredTodos);
+  const todos =  useAppSelector(selectFilteredTodos);
  
   useEffect(() => {
     const savedTodos = JSON.parse(localStorage.getItem('todos') || '[]');
@@ -21,7 +21,7 @@ export const TodoList: React.FC = () => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
   return (
-    <Container maxWidth="sm">
+    <Container>
       {todos.map((todo) => (
         <TodoItem key={todo.id} {...todo} />
       ))}

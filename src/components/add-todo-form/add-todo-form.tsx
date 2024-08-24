@@ -17,7 +17,7 @@ export const AddTodoForm: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container>
       <Stack
         component="form"
         direction="row"

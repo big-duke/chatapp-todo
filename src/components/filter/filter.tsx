@@ -1,6 +1,6 @@
 import { Button, Stack } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { getFilter } from '../../store/todo-data/todo-selectors';
+import { selectFilter } from '../../store/todo-data/todo-selectors';
 import { FilterButton, TodoFilter } from '../../types/todo';
 import { todoActions } from '../../store/todo-data/todo-slice';
 
@@ -11,7 +11,7 @@ const buttons: FilterButton[] = [
 ];
 
 export const Filter = () => {
-  const currentFilter = useAppSelector(getFilter);
+  const currentFilter = useAppSelector(selectFilter);
   const dispatch = useAppDispatch();
   const handleFilterClick = (filter: TodoFilter) => {
     dispatch(todoActions.setFilter(filter));
